@@ -1,0 +1,41 @@
+from typing import Optional
+import numpy as np
+
+class Solution:
+    def binary_search(self, l: int, r: int, nums: List[int], target: int) -> int:
+        if l > r:
+            return -1
+        m = l + (r - l) // 2
+
+        if nums[m] == target:
+            return m
+        if nums[m] < target:
+            return self.binary_search(m + 1, r, nums, target)
+        return self.binary_search(l, m - 1, nums, target)
+
+    def search(self, nums: List[int], target: int) -> int:
+        return self.binary_search(0, len(nums) - 1, nums, target)
+# class Solution:
+#     def search(self, nums: List[int], target: int) -> int:
+#         # NOTE: `nums` is already sorted in ascending order!
+#         if len(nums) == 0:
+#             return -1
+#         if len(nums) == 1:
+#             if target == nums[0]:
+#                 return 0
+#             return -1
+#         # Search only the left or right depending on whether the target is 
+#         # larger or smaller than the mid-point value in the list
+#         mid_idx = len(nums) // 2
+#         mid_val = nums[mid_idx]
+#         # if target == mid_val:
+#         #     return mid_idx
+#         if target < mid_val:
+#             return self.search(nums[:mid_idx], target) # does not include mid_idx
+#         elif target >= mid_val:
+#             res = self.search(nums[mid_idx:], target)
+#             if res == -1:
+#                 return -1
+#             else:
+#                 return mid_idx + res
+#         return -1
